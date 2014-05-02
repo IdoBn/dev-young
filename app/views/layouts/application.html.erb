@@ -36,12 +36,15 @@
             <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
           <% end %>
         </li>
-        <li class="has-dropdown">
-          <a href="#">Right Button Dropdown</a>
-          <ul class="dropdown">
-            <li><a href="#">First link in dropdown</a></li>
-          </ul>
-        </li>
+
+        <% if current_user %>
+          <li class="has-dropdown">
+            <a href="#">groups</a>
+            <ul class="dropdown">
+              <li><a href="#"><%= link_to "all groups", groups_path %></a></li>
+            </ul>
+          </li>
+        <% end %> <!-- if -->
       </ul>
 
       <!-- Left Nav Section -->
@@ -49,7 +52,7 @@
         <% if current_user %>
           <li>
             <a href="#">
-              <%= image_tag current_user.thumbnail, size: '35', class: 'th' %>
+              <%= image_tag current_user.thumbnail, size: '25', class: 'th' %>
               <%= current_user.name %>
             </a>
         </li>

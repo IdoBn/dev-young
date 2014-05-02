@@ -1,0 +1,13 @@
+<h2>Groups</h2>
+<table>
+	<tr>
+		<td>name</td>
+		<td>owner</td>
+	</tr>
+	<% @groups.each do |group| %>
+		<tr>
+			<td><%= link_to group.name, group_path(group.id) %></td>
+			<td><%= group.user.name %></td>
+		</tr>
+	<% end %>
+</table>

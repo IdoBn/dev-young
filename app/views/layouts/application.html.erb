@@ -12,56 +12,56 @@
   </head>
 
   <body>
-    <div id="user_nav">
-    </div>
-
-
-  <nav class="top-bar" data-topbar>
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="#">My Site</a></h1>
-      </li>
-       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
-
-    <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li>
-          <% if current_user %>
-            <%= link_to "Sign out", signout_path, id: "sign_out", method: :delete %>
-          <% else %>
-            <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-          <% end %>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">My Site</a></h1>
         </li>
-
-        <% if current_user %>
-          <li class="has-dropdown">
-            <a href="#">groups</a>
-            <ul class="dropdown">
-              <li><a href="#"><%= link_to "all groups", groups_path %></a></li>
-            </ul>
-          </li>
-        <% end %> <!-- if -->
+         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
 
-      <!-- Left Nav Section -->
-      <ul class="left">
-        <% if current_user %>
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
           <li>
-            <a href="#">
-              <%= image_tag current_user.thumbnail, size: '25', class: 'th' %>
-              <%= current_user.name %>
-            </a>
-        </li>
-        <% end %> <!-- if -->
-      </ul>
-    </section>
-  </nav>
-  
+            <% if current_user %>
+              <%= link_to "Sign out", signout_path, id: "sign_out", method: :delete %>
+            <% else %>
+              <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+            <% end %>
+          </li>
 
-    <%= yield %>
+          <% if current_user %>
+            <li class="has-dropdown">
+              <a href="#">groups</a>
+              <ul class="dropdown">
+                <li><%= link_to "all groups", groups_path %></li>
+                <% if current_user.group %>
+                  <li><%= link_to "my group", group_path(current_user.group) %></li>
+                <% end %> <!-- if -->
+              </ul>
+            </li>
+          <% end %> <!-- if -->
+        </ul>
+
+        <!-- Left Nav Section -->
+        <ul class="left">
+          <% if current_user %>
+            <li>
+              <a href="#">
+                <%= image_tag current_user.thumbnail, size: '25', class: 'th' %>
+                <%= current_user.name %>
+              </a>
+          </li>
+          <% end %> <!-- if -->
+        </ul>
+      </section>
+    </nav>
+    
+    <div>
+      <%= yield %>
+    </div>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

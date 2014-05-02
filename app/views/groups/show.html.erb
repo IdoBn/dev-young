@@ -1,2 +1,8 @@
 <h1><%= @group.name %></h1>
-<h3><%= @group.user.name %></h3>
+<h3>owner: <%= @group.user.name %></h3>
+
+<ul>
+	<% @group.users.each do |user| %>
+		<li><%= user.name %></li>
+	<% end %>
+</ul>

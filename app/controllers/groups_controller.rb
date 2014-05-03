@@ -1,13 +1,14 @@
 class GroupsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :user_has_group?, only: [:new, :create]
+	before_action :authorize_user!, only: [:update, :destroy]
+	before_action :load_group, only: [:show, :update, :edit, :destroy]
 
 	def index
 		@groups = Group.all
 	end
 
 	def show 
-		@group = Group.find(params[:id])
 	end
 
 	def new
@@ -26,7 +27,32 @@ class GroupsController < ApplicationController
 		end
 	end
 
+	def edit
+	end
+
+	def update
+		if @group.update_attributes(group_params)
+			redirect_to group_path, :notice => "Group updated!"
+		else
+			render 'edit'
+		end
+	end
+
+	def destroy
+		if @group.destroy
+			current_user.group_id = nil
+			flash[:notice] = "Group destroyed!"
+		else
+			flash[:alert] = "Group was not destroyed!"
+		end
+		redirect_to groups_path
+	end
+
 	private
+		def load_group
+			@group = Group.find(params[:id])
+		end
+
 		def group_params
 			params.require(:group).permit(:name)
 		end
@@ -35,6 +61,13 @@ class GroupsController < ApplicationController
 			if current_user.group
 				redirect_to '/'
 				flash[:alert] = "You already have a group"
+			end
+		end
+
+		def authorize_user!
+			unless current_user.owns?(Group.find(params[:id]))
+				redirect_to '/'
+				flash[:alert] = "You are not authorized to do this"
 			end
 		end
 end

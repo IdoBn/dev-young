@@ -3,6 +3,9 @@ class Group < ActiveRecord::Base
 	belongs_to :user
 
 	validates :name, presence: true
+	validates_uniqueness_of :name
+	validates_uniqueness_of :user_id
+
 	before_create :add_user
 
 	private

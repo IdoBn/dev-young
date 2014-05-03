@@ -37,7 +37,7 @@
               <a href="#">groups</a>
               <ul class="dropdown">
                 <li><%= link_to "all groups", groups_path %></li>
-                <% if current_user.group %>
+                <% if current_user.group && current_user.group.id %>
                   <li><%= link_to "my group", group_path(current_user.group.id) %></li>
                 <% else %>
                   <li><%= link_to "create group", new_group_path %></li>

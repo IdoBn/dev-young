@@ -3,4 +3,10 @@ class Group < ActiveRecord::Base
 	belongs_to :user
 
 	validates :name, presence: true
+	before_create :add_user
+
+	private
+		def add_user
+			self.users << self.user
+		end
 end

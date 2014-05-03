@@ -33,9 +33,6 @@ ActiveRecord::Schema.define(version: 20140502062616) do
     t.datetime "updated_at"
     t.string   "email"
     t.string   "thumbnail"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "address"
     t.integer  "group_id"
   end
 

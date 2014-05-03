@@ -33,8 +33,15 @@ gem 'omniauth-facebook'
 
 # styles
 gem 'foundation-rails'
-
 gem 'simple_form'
+
+group :development, :test do
+	gem 'rspec-rails'
+	gem 'guard-rspec'
+	gem 'factory_girl_rails', "~> 4.0"
+	gem 'database_cleaner' #for factroy girl
+	gem 'ffaker'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

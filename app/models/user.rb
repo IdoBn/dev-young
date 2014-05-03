@@ -1,6 +1,22 @@
 class User < ActiveRecord::Base
 	has_one :group
 
+	def build_group(params)
+		if self.group
+			return false
+		else
+			super
+		end
+	end
+
+	def create_group(params)
+		if self.group
+			return false
+		else
+			super
+		end
+	end
+
 	def owns?(obj)
 		obj.user == self
 	end

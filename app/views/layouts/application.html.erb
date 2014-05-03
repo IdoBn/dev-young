@@ -38,7 +38,9 @@
               <ul class="dropdown">
                 <li><%= link_to "all groups", groups_path %></li>
                 <% if current_user.group %>
-                  <li><%= link_to "my group", group_path(current_user.group) %></li>
+                  <li><%= link_to "my group", group_path(current_user.group.id) %></li>
+                <% else %>
+                  <li><%= link_to "create group", new_group_path %></li>
                 <% end %> <!-- if -->
               </ul>
             </li>
@@ -58,9 +60,23 @@
         </ul>
       </section>
     </nav>
-    
-    <div>
-      <%= yield %>
+      
+    <div class="row">
+      <% if flash[:notice] %>
+      <div data-alert class="alert-box success radius">
+        <%= notice %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div data-alert class="alert-box alert radius">
+        <%= alert %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+      <div class="panel">
+        <%= yield %>
+      </div>
     </div>
     <%= javascript_include_tag "application" %>
   </body>

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   resources :groups
 
+  match 'requests/user', to: 'requests#request_user', via: [:post]
+  match 'requests/group', to: 'requests#request_group', via: [:post]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

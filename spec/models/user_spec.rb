@@ -28,4 +28,12 @@ describe User do
 			}.to change { user2.group }.to(group1)
 		end
 	end
+
+	context 'Request' do
+		it 'creates request' do
+			expect {
+				user3.create_request(group1)
+			}.to change { group1.unconfirmed_requests.count }.by(1)
+		end
+	end
 end

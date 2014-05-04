@@ -1,5 +1,14 @@
 class User < ActiveRecord::Base
 	has_one :group
+	has_many :requests
+
+	def create_request(group)
+		self.requests.create(group_id: group.id, user_confirm: true)
+	end
+
+	def unconfirmed_requests
+		self.requests.where(user_confirm: false)
+	end
 
 	def create_group(params = nil)
 		return false if self.group

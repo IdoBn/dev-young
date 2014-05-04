@@ -21,5 +21,11 @@ describe User do
 		it '#owns?' do
 			expect(user1.owns?(group1)).to eq(true)
 		end
+
+		it 'has group even though it does not own it' do
+			expect {
+				group1.users << user2
+			}.to change { user2.group }.to(group1)
+		end
 	end
 end

@@ -23,5 +23,12 @@ describe Group do
 				group1.users << user1
 			}.to_not change{ group1.users.count }
 		end
+
+		it 'still belongs to user' do
+			expect {
+				group1.users << user2
+				group1.users << user3
+			}.to_not change{ group1.user }
+		end
 	end
 end

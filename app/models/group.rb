@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
 	has_many :users
-	belongs_to :user
+	belongs_to :user, foreign_key: :user_id
 
 	has_many :requests
 

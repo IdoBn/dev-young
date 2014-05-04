@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
 	has_one :group
 
-	def create_group(params)
+	def create_group(params = nil)
 		return false if self.group
 		super
 	end
 
-	def build_group(params)
+	def build_group(params = nil)
 		return false if self.group
 		super
 	end

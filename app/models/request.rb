@@ -7,6 +7,10 @@ class Request < ActiveRecord::Base
 	
 	after_save :check_confirm
 
+	def finished?
+		self.group.users.include? self.user		
+	end
+
 	private
 		def user_can_request
 			@user = self.user

@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :can_request?
-	# before_action :load_group, only: [:request_user]
+	before_action :load_request, only: [:update]
 
 	def request_user
 		@user = User.find(params[:user_id])
@@ -35,6 +35,14 @@ class RequestsController < ApplicationController
 		end
 	end
 
+	def update
+		if @request.update_attributes(request_params) && @request.finished?
+			redirect_to group_path(@request.group.id), :notice => "#{@request.user.name} has been added to #{@request.group.name}"
+		else
+			redirect_to group_path(@request.group.id), :alert => "#{@request.user.name} has not been added to #{@request.group.name}"
+		end
+	end
+
 	private
 		def can_request?
 			current_user.can_request?
@@ -44,5 +52,13 @@ class RequestsController < ApplicationController
 			if current_user.owns?(current_user.group)
 				return current_user.group
 			end 
+		end
+
+		def load_request
+			@request = Request.find(params[:id])
+		end
+
+		def request_params
+			params.require(:request).permit(:user_confirm, :group_confirm)
 		end
 end

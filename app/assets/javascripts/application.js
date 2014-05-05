@@ -14,5 +14,9 @@
 //= require jquery_ujs
 //= require foundation
 //= require_tree .
+//= require toastr
 
 $(function(){ $(document).foundation(); });
+
+// toastr.success("My name is Inigo Montoya. You killed my father. Prepare to die!")
+

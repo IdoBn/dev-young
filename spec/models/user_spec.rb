@@ -30,9 +30,9 @@ describe User do
 	end
 
 	context 'Request' do
-		it 'creates request' do
+		it '#new_request' do
 			expect {
-				user3.create_request(group1)
+				user3.new_request(group1).save
 			}.to change { group1.unconfirmed_requests.count }.by(1)
 		end
 	end

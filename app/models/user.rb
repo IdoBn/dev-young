@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 		Group.find(self.group_id) if self.group_id
 	end
 
-	def create_request(group)
+	def new_request(group)
 		self.requests.create(group_id: group.id, user_confirm: true)
 	end
 

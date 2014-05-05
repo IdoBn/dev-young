@@ -1,18 +1,34 @@
 class RequestsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :can_request?
-	before_action :load_group, only: [:request_user]
+	# before_action :load_group, only: [:request_user]
 
 	def request_user
 		@user = User.find(params[:user_id])
-		@group.create_request(@user)
-		redirect_to groups_path
+		@request = group.new_request(@user)
+
+		respond_to do |format|
+			if @request.save
+				format.html { redirect_to groups_path, :notice => "request sent to #{@user.name}" }
+				format.js
+			else
+				render :error
+			end
+		end
 	end
 
 	def request_group
 		@group = Group.find(params[:group_id])
-		current_user.create_request(@group)
-		redirect_to groups_path
+		@request = current_user.new_request(@group)
+
+		respond_to do |format|
+			if @request.save
+				format.html { redirect_to groups_path, :notice => "request sent to #{@group.name}" }
+				format.js
+			else
+				render :error
+			end
+		end
 	end
 
 	private
@@ -20,9 +36,9 @@ class RequestsController < ApplicationController
 			current_user.can_request?
 		end
 
-		def load_group
+		def group
 			if current_user.owns?(current_user.group)
-				@group = current_user.group
+				return current_user.group
 			end 
 		end
 end

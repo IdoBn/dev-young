@@ -1,0 +1,6 @@
+<div class="button-bar">
+  <ul class="button-group round">
+  	<%= link_to "edit", edit_group_path(@group.id), class: 'tiny button' %>
+		<%= link_to "destroy", group_path(@group.id), method: :delete, class: 'button tiny alert' %>
+  </ul>
+</div>

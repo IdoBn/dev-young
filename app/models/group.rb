@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
 
 	before_create :add_user
 
-	def create_request(user)
+	def new_request(user)
 		self.requests.create(user_id: user.id, group_confirm: true)
 	end
 

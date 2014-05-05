@@ -7,5 +7,4 @@
 	<% end %>
 </ul>
 
-<%= link_to "edit", edit_group_path(@group.id) %> |
-<%= link_to "destroy", group_path(@group.id), method: :delete %>
+<%= render 'links' if current_user.owns?(@group) %>

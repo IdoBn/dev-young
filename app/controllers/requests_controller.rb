@@ -1,4 +1,5 @@
 class RequestsController < ApplicationController
+	before_action :authenticate_user!
 	before_action :can_request?
 	before_action :load_group, only: [:request_user]
 
@@ -16,7 +17,6 @@ class RequestsController < ApplicationController
 
 	private
 		def can_request?
-			authenticate_user!
 			current_user.can_request?
 		end
 

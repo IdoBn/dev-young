@@ -9,11 +9,10 @@ class RequestsController < ApplicationController
 
 		respond_to do |format|
 			if @request.save
-				flash[:notice] = "request sent to #{@user.name}"
 				format.html { redirect_to groups_path  }
 				format.js
 			else
-				format.js { redirect_to :back, alert: "request has not been sent" }
+				format.js { redirect_to group_path(@request.group_id), alert: "request has not been sent" }
 				format.html { redirect_to groups_path, :alert => "request has not been sent" }
 			end
 		end
@@ -25,11 +24,10 @@ class RequestsController < ApplicationController
 
 		respond_to do |format|
 			if @request.save
-				flash[:notice] = "request sent to #{@group.name}"
 				format.html { redirect_to groups_path }
 				format.js
 			else
-				format.js { redirect_to :back, alert: "request has not been sent" }
+				format.js { redirect_to group_path(@request.group_id), alert: "request has not been sent" }
 				format.html { redirect_to groups_path, :alert => "request has not been sent" }
 			end
 		end

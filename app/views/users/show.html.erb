@@ -1,0 +1,8 @@
+<h2><%= @user.name %></h2>
+
+<% if can_request_user?(@user, current_user.group) %>
+	<%= form_tag(requests_user_path, id: 'request-form', method: :post, remote: true) do %>
+		<%= hidden_field_tag(:user_id, @user.id) %>
+		<%= submit_tag('request to join!', class: 'button tiny') %>
+	<% end %>
+<% end %>

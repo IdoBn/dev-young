@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :groups
+  resources :users, only: [:show, :index]
 
   match 'requests/user', to: 'requests#request_user', via: [:post]
   match 'requests/group', to: 'requests#request_group', via: [:post]

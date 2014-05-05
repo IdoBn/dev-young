@@ -12,7 +12,8 @@ class RequestsController < ApplicationController
 				format.html { redirect_to groups_path, :notice => "request sent to #{@user.name}" }
 				format.js
 			else
-				render :error
+				format.js { render :error }
+				format.html { redirect_to groups_path, :alert => "request has not been sent" }
 			end
 		end
 	end
@@ -26,7 +27,8 @@ class RequestsController < ApplicationController
 				format.html { redirect_to groups_path, :notice => "request sent to #{@group.name}" }
 				format.js
 			else
-				render :error
+				format.js { render :error }
+				format.html { redirect_to groups_path, :alert => "request has not been sent" }
 			end
 		end
 	end

@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
 	end
 
 	def new_request(group)
-		self.requests.create(group_id: group.id, user_confirm: true)
+		self.requests.new(group_id: group.id, user_confirm: true)
 	end
 
 	def can_request?
-		(self.group == nil) || self.owns?(self.group)
+		self.group == nil || !self.owns?(self.group)
 	end
 
 	def unconfirmed_requests

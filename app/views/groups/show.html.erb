@@ -7,4 +7,11 @@
 	<% end %>
 </ul>
 
+<% if can_request_group?(current_user, @group) %>
+	<%= form_tag(requests_group_path, method: :post, remote: true) do %>
+		<%= hidden_field_tag(:group_id, @group.id) %>
+		<%= submit_tag('request to join!') %>
+	<% end %>
+<% end %>
+
 <%= render 'links' if current_user.owns?(@group) %>

@@ -1,4 +1,12 @@
 class Group < ActiveRecord::Base
+	include PgSearch
+
+	pg_search_scope :search, :against => :name,
+	associated_against: {user: :name},
+	:using => {
+			tsearch: {:dictionary => "english"}
+		}
+
 	has_many :users
 	belongs_to :user, foreign_key: :user_id
 

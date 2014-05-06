@@ -1,9 +1,16 @@
 class User < ActiveRecord::Base
+	include PgSearch
+
 	has_one :group, foreign_key: :user_id
 	has_many :requests
 
-	alias_method :old_group, :group
+	pg_search_scope :search, :against => :name,
+		associated_against: {group: :name},
+		:using => {
+				tsearch: {:dictionary => "english"}
+			}
 
+	alias_method :old_group, :group
 	def group
 		return self.old_group if self.old_group
 		Group.find(self.group_id) if self.group_id

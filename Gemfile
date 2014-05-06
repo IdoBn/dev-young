@@ -39,6 +39,9 @@ gem 'omniauth-facebook'
 gem 'foundation-rails'
 gem 'simple_form'
 
+# search
+gem 'pg_search'
+
 group :development, :test do
 	gem 'rspec-rails'
 	gem 'guard-rspec'

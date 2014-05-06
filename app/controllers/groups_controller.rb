@@ -5,7 +5,11 @@ class GroupsController < ApplicationController
 	before_action :load_group, only: [:show, :update, :edit, :destroy]
 
 	def index
-		@groups = Group.all
+		@groups = Group.search(params[:query])
+		respond_to do |format|
+  		format.json {render json: @groups}
+  		format.html
+  	end
 	end
 
 	def show

@@ -55,7 +55,10 @@
                 <%= image_tag current_user.thumbnail, size: '25', class: 'th' %>
                 <%= current_user.name %>
               </a>
-          </li>
+            </li>
+            <li class="has-form">
+              <%= render 'layouts/search_form', path: users_path %>
+            </li>
           <% end %> <!-- if -->
         </ul>
       </section>

@@ -1,0 +1,16 @@
+<form id="search-form">
+	<div class="row collapse">
+	  <div class="large-3 small-3 columns">
+	    <select id="select-search">
+	      <option>groups</option>
+	      <option>users</option>
+	    </select>
+	  </div>
+	  <div class="large-7 small-7 columns">
+	    <%= text_field_tag :query, params[:query], id: 'query-input' %>
+	  </div>
+		<div class="large-2 small-2 columns">
+			<%= submit_tag "search", class: 'button tiny' %>
+		</div>
+	</div>
+</form>

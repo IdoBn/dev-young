@@ -34,7 +34,7 @@
 <% end %>
 
 <% if requested_user_by_group(current_user, @group) %>
-	<%= form_tag(request_paths, method: :patch) do %>
+	<%= form_tag(requests_path, method: :patch) do %>
 		<%= hidden_field_tag(:user_id, current_user.id) %>
 		<%= hidden_field_tag(:group_id, @group.id) %>
 		<%= hidden_field_tag('request[user_confirm]', true) %>

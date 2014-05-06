@@ -18,18 +18,25 @@
 </div>
 
 <% if can_request_user?(@user, current_user.group) %>
-	<%= form_tag(requests_user_path, id: 'request-form', method: :post, remote: true) do %>
-		<%= hidden_field_tag(:user_id, @user.id) %>
-		<%= submit_tag('request to join!', class: 'button tiny') %>
-	<% end %>
+	<div id="request-form">
+		<%= form_tag(requests_user_path, method: :post, remote: true) do %>
+			<%= hidden_field_tag(:user_id, @user.id) %>
+			<%= submit_tag('request to join!', class: 'button tiny') %>
+		<% end %>
+	</div>
 <% end %>
 
-<% if requested_user(@user, current_user.group) %>
-	<%= form_tag(requests_path, method: :patch) do %>
+<% if requested_group_by_user(@user, current_user.group) %>
+	<%= form_tag(request_paths, method: :patch) do %>
 		<%= hidden_field_tag(:user_id, @user.id) %>
 		<%= hidden_field_tag(:group_id, current_user.group.id) %>
 		<%= hidden_field_tag('request[group_confirm]', true) %>
 		<%= submit_tag('accept user', class: 'button tiny') %>
 	<% end %>
+<% end %>
+
+
+<% if requested_user_by_group(@user, current_user.group) %>
+	<%= render 'requests/delete_form', user: @user, group: current_user.group %>
 <% end %>
 

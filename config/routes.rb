@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   match 'requests/user', to: 'requests#request_user', via: [:post]
   match 'requests/group', to: 'requests#request_group', via: [:post]
   match 'requests', to: 'requests#update', via: [:put, :patch]
+  match 'requests', to: 'requests#destroy', via: [:delete]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

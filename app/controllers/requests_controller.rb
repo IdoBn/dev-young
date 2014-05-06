@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :can_request?
-	before_action :load_request, only: [:update]
+	before_action :load_request, only: [:update, :destroy]
 
 	def request_user
 		@user = User.find(params[:user_id])
@@ -24,7 +24,7 @@ class RequestsController < ApplicationController
 
 		respond_to do |format|
 			if @request.save
-				format.html { redirect_to groups_path }
+				format.html { redirect_to groups_path, notice: "request has been sent" }
 				format.js
 			else
 				format.js { redirect_to group_path(@request.group_id), alert: "request has not been sent" }
@@ -38,6 +38,14 @@ class RequestsController < ApplicationController
 			redirect_to group_path(@request.group.id), :notice => "#{@request.user.name} has been added to #{@request.group.name}"
 		else
 			redirect_to group_path(@request.group.id), :alert => "#{@request.user.name} has not been added to #{@request.group.name}"
+		end
+	end
+
+	def destroy
+		if @request.destroy
+			redirect_to group_path(@request.group.id), notice: "Request was destroyed!"
+		else
+			redirect_to group_path(@request.group.id), alert: "Request was not destroyed!"
 		end
 	end
 

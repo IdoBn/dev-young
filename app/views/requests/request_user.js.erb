@@ -1,3 +1,6 @@
-$('#request-form').fadeOut("slow");
+$('#request-form').fadeOut("slow", function() {
+	$(this).replaceWith('<%= j(render 'requests/delete_form', user: @user, group: current_user.group) %>');
+	$(this).fadeIn("slow");
+});
 
 toastr.success("request sent to <%= @user.name %>");

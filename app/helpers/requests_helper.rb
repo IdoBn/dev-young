@@ -15,7 +15,7 @@ module RequestsHelper
 		end
 	end
 
-	def requested_group(user, group)
+	def requested_user_by_group(user, group)
 		if user && group
 			return user.unconfirmed_requests.map(&:group).include?(group)
 		else
@@ -23,7 +23,7 @@ module RequestsHelper
 		end
 	end
 
-	def requested_user(user, group)
+	def requested_group_by_user(user, group)
 		if user && group
 			return group.unconfirmed_requests.map(&:user).include?(user)
 		else

@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe UsersController do
+  before :each do
+    controller.stub(:current_user).and_return(user1)
+  end
 
   describe "GET 'index'" do
     it "returns http success" do

@@ -1,7 +1,3 @@
-# $('#select-search').change ->
-# 	action = $(@).val()
-# 	$('#search-form').attr('action', '/' + action)
-
 $('#search-form').submit ->
 	getSearch()
 

@@ -8,9 +8,9 @@ describe GroupsController do
   end
 
 	context 'GET #index' do
-		before(:each) { get :index }
+		before(:each) { get :index, query: 'Maria' }
 
-		it { expect(assigns(:groups)).to eq(Group.all) }
+		it { expect(assigns(:groups)).to eq([group1]) }
 		it { expect(response).to render_template(:index) }
 	end
 

@@ -51,7 +51,7 @@
         <ul class="left">
           <% if current_user %>
             <li>
-              <a href="#">
+              <a href="/users/<%= current_user.id %>">
                 <%= image_tag current_user.thumbnail, size: '25', class: 'th' %>
                 <%= current_user.name %>
               </a>

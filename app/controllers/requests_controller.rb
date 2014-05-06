@@ -2,6 +2,7 @@ class RequestsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :can_request?
 	before_action :load_request, only: [:update, :destroy]
+	before_action :authorize_user!, only: [:update, :destroy]
 
 	def request_user
 		@user = User.find(params[:user_id])
@@ -66,5 +67,12 @@ class RequestsController < ApplicationController
 
 		def request_params
 			params.require(:request).permit(:user_confirm, :group_confirm)
+		end
+
+		def authorize_user!
+			unless current_user.owns?(@request)
+				redirect_to '/'
+				flash[:alert] = "You are not authorized to do this"
+			end
 		end
 end

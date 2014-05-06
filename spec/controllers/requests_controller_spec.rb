@@ -49,6 +49,22 @@ describe RequestsController do
 	  it 'takes group request to invite user' do
 	  	post :request_user, user_id: user3.id
 	  	expect(response).to redirect_to '/'
-	  end 
+	  end
+
+	  it 'adds user to group group confirm' do
+  		request = user2.new_request(group1)
+  		request.save
+  		expect {
+  			patch :update, request: { group_confirm: true }, user_id: user2.id, group_id: group1.id
+  		}.to_not change { group1.users.count }.by(1)
+  	end
+
+  	it 'adds user to group user confirm' do
+  		request = group1.new_request(user2)
+  		request.save
+  		expect {
+  			patch :update, request: { user_confirm: true }, user_id: user2.id, group_id: group1.id
+  		}.to_not change { group1.users.count }.by(1)
+	  end
 	end
 end

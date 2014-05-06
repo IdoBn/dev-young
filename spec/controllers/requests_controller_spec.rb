@@ -26,7 +26,7 @@ describe RequestsController do
 	  		request = user2.new_request(group1)
 	  		request.save
 	  		expect {
-	  			patch :update, request: { group_confirm: true }, id: request.id
+	  			patch :update, request: { group_confirm: true }, user_id: user2.id, group_id: group1.id
 	  		}.to change { group1.users.count }.by(1)
 	  	end
 
@@ -34,7 +34,7 @@ describe RequestsController do
 	  		request = group1.new_request(user2)
 	  		request.save
 	  		expect {
-	  			patch :update, request: { user_confirm: true }, id: request.id
+	  			patch :update, request: { user_confirm: true }, user_id: user2.id, group_id: group1.id
 	  		}.to change { group1.users.count }.by(1)
 		  end
 	  end

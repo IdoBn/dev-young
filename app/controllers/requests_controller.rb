@@ -53,7 +53,7 @@ class RequestsController < ApplicationController
 		end
 
 		def load_request
-			@request = Request.find(params[:id])
+			@request = Request.where(user_id: params[:user_id], group_id: params[:group_id]).first
 		end
 
 		def request_params

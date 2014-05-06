@@ -1,11 +1,28 @@
 <h1><%= @group.name %></h1>
 <h3>owner: <%= @group.user.name %></h3>
 
-<ul>
-	<% @group.users.each do |user| %>
-		<li><%= user.name %></li>
-	<% end %>
-</ul>
+<div class="row">
+  <div class="large-6 columns">
+  	<ul>
+			<% @group.users.each do |user| %>
+				<li><%= user.name %></li>
+			<% end %>
+			<%= render 'links' if current_user.owns?(@group) %>
+		</ul>
+	</div>
+  <div class="large-6 columns">
+  	<% if current_user.owns?(@group) && @group.unconfirmed_requests.any? %>
+			<table>
+				<tr>
+					<td>name</td>
+				</tr>
+				<% @group.unconfirmed_requests.each do |request| %>
+					<td><%= link_to request.user.name, user_path(request.user.id) %></td>
+				<% end %>
+			</table>
+  	<% end %>
+  </div>
+</div>
 
 <% if can_request_group?(current_user, @group) %>
 	<%= form_tag(requests_group_path, id: 'request-form', method: :post, remote: true) do %>
@@ -14,4 +31,3 @@
 	<% end %>
 <% end %>
 
-<%= render 'links' if current_user.owns?(@group) %>

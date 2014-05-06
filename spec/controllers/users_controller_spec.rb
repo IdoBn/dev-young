@@ -11,7 +11,7 @@ describe UsersController do
 
   describe "GET 'show'" do
     it "returns http success" do
-      get 'show'
+      get 'show', id: user2.id
       response.should be_success
     end
   end

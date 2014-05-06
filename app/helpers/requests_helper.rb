@@ -8,10 +8,10 @@ module RequestsHelper
 	end
 
 	def requested_group(user, group)
-		user.unconfirmed_requests.map(&:group).include? group
+		user.unconfirmed_requests.map(&:group).include?(group)
 	end
 
 	def requested_user(user, group)
-		group.unconfirmed_requests.map(&:user).include? user
+		group.unconfirmed_requests.map(&:user).include?(user)
 	end
 end

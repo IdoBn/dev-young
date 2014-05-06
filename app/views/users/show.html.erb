@@ -1,5 +1,22 @@
 <h2><%= @user.name %></h2>
 
+<div class="row">
+  <div class="large-6 columns">
+	</div>
+  <div class="large-6 columns">
+  	<% if current_user == @user && @user.unconfirmed_requests.any? %>
+			<table>
+				<tr>
+					<td>name</td>
+				</tr>
+				<% @user.unconfirmed_requests.each do |request| %>
+					<td><%= link_to request.group.name, group_path(request.group.id) %></td>
+				<% end %>
+			</table>
+  	<% end %>
+  </div>
+</div>
+
 <% if can_request_user?(@user, current_user.group) %>
 	<%= form_tag(requests_user_path, id: 'request-form', method: :post, remote: true) do %>
 		<%= hidden_field_tag(:user_id, @user.id) %>
@@ -15,3 +32,4 @@
 		<%= submit_tag('accept user', class: 'button tiny') %>
 	<% end %>
 <% end %>
+

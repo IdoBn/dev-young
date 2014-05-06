@@ -1,17 +1,33 @@
 module RequestsHelper
 	def can_request_group?(user, group)
-		user.new_request(group).valid?
+		if user && group
+			return user.new_request(group).valid?
+		else
+			return false
+		end
 	end
 
 	def can_request_user?(user, group)
-		group.new_request(user).valid?
+		if user && group
+			return group.new_request(user).valid?
+		else
+			return false
+		end
 	end
 
 	def requested_group(user, group)
-		user.unconfirmed_requests.map(&:group).include?(group)
+		if user && group
+			return user.unconfirmed_requests.map(&:group).include?(group)
+		else
+			return false
+		end
 	end
 
 	def requested_user(user, group)
-		group.unconfirmed_requests.map(&:user).include?(user)
+		if user && group
+			return group.unconfirmed_requests.map(&:user).include?(user)
+		else
+			return false
+		end
 	end
 end

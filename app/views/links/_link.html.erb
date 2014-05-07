@@ -4,6 +4,4 @@
 	<% if link.user = current_user %>
 		<small><%= link_to "remove", link_path(link.id), method: :delete, remote: true %></small>
 	<% end %>
-	<br>
-	<%= link.content %>
 </li>

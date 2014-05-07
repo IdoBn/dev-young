@@ -4,7 +4,7 @@ $('#search-form').submit ->
 getSearch = ->
 	$.ajax
 		type: 'GET'
-		url: "/#{$('#select-search').val()}"
+		url: "/#{$('#select-search').val()}.json"
 		data: 
 			query: $('#query-input').val()
 		success: (data)->

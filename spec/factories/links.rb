@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :link do
     name "MyString"
-    content "MyString"
     url "MyString"
     user_id 1
   end

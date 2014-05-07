@@ -5,19 +5,24 @@ class GroupsController < ApplicationController
 	before_action :load_group, only: [:show, :update, :edit, :destroy, :remove_user]
 
 	def index
-		@groups = Group.all
-		@hash = Gmaps4rails.build_markers(@groups) do |group, marker|
-		  marker.lat group.latitude
-		  marker.lng group.longitude
-		  marker.infowindow  "<a href='/groups/#{group.id}'>#{group.name}</a>"
-		  # marker.picture({
-		  # 	'url' => group.user.thumbnail,
-		  # 	'width' => 36,
-		  # 	'height' => 36
-		  # })
-		  marker.json({
-		  	title: group.name
-		  }) 
+		respond_to do |format|
+			format.json { render json: Group.search(params[:query]) }
+			format.html do
+				@groups = Group.all
+				@hash = Gmaps4rails.build_markers(@groups) do |group, marker|
+				  marker.lat group.latitude
+				  marker.lng group.longitude
+				  marker.infowindow  "<a href='/groups/#{group.id}'>#{group.name}</a>"
+				  # marker.picture({
+				  # 	'url' => group.user.thumbnail,
+				  # 	'width' => 36,
+				  # 	'height' => 36
+				  # })
+				  marker.json({
+				  	title: group.name
+				  }) 
+		end
+			end
 		end
 	end
 

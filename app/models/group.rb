@@ -7,12 +7,15 @@ class Group < ActiveRecord::Base
 			tsearch: {:dictionary => "english"}
 		}
 
+	geocoded_by :address
+	after_validation :geocode, :if => :address_changed?
+
 	has_many :users
 	belongs_to :user, foreign_key: :user_id
 
 	has_many :requests
 
-	validates :name, presence: true
+	validates :address, :name, presence: true
 	validates_uniqueness_of :name
 	validates_uniqueness_of :user_id
 

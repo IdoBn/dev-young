@@ -42,6 +42,10 @@ gem 'simple_form'
 # search
 gem 'pg_search'
 
+# location
+gem "geocoder"
+gem 'gmaps4rails'
+
 group :development, :test do
 	gem 'rspec-rails'
 	gem 'guard-rspec'

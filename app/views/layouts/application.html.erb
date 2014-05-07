@@ -74,12 +74,13 @@
       </div>
     </div>
 
+    <%= javascript_include_tag "application" %>
+    <%= flash_to_toastr %>
+
     <div class="row">
       <div class="panel">
         <%= yield %>
       </div>
     </div>
-    <%= javascript_include_tag "application" %>
-    <%= flash_to_toastr %>
   </body>
 </html>

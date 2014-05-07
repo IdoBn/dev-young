@@ -54,6 +54,11 @@ RSpec.configure do |config|
     end
   end
 
+  # geocoder
+  config.before(:each) do
+    Group.any_instance.stub(:geocode) { {latitude: 40.6891988, longitude: -74.0445167} }
+  end
+
   # setting stuff up
   config.include DevYoung::GlobalHelpers
 

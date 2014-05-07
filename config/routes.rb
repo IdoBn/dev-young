@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   match 'requests', to: 'requests#update', via: [:put, :patch]
   match 'requests', to: 'requests#destroy', via: [:delete]
 
+  resources :links, only: [:update, :create, :destroy]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	include PgSearch
 
+	has_many :links
 	has_one :group, foreign_key: :user_id
 	has_many :requests
 

@@ -70,7 +70,12 @@ class RequestsController < ApplicationController
 		end
 
 		def authorize_user!
-			unless current_user.owns?(@request)
+			begin
+				unless current_user.owns?(@request.group) || current_user.owns?(@request)
+					redirect_to '/'
+					flash[:alert] = "You are not authorized to do this"
+				end
+			rescue
 				redirect_to '/'
 				flash[:alert] = "You are not authorized to do this"
 			end

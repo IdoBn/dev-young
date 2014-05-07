@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :groups
+  match 'groups/:id/remove/:user_id', to: 'groups#remove_user', via: [:delete], as: 'group_remove'
+
   resources :users, only: [:show, :index]
 
   match 'requests/user', to: 'requests#request_user', via: [:post]

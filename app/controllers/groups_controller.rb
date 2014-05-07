@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :user_has_group?, only: [:new, :create]
 	before_action :authorize_user!, only: [:edit, :update, :destroy]
-	before_action :load_group, only: [:show, :update, :edit, :destroy]
+	before_action :load_group, only: [:show, :update, :edit, :destroy, :remove_user]
 
 	def index
 		@groups = Group.search(params[:query])
@@ -50,6 +50,18 @@ class GroupsController < ApplicationController
 			flash[:alert] = "Group was not destroyed!"
 		end
 		redirect_to groups_path
+	end
+
+	def remove_user
+		@user = User.find(params[:user_id])
+		if (current_user.owns?(@group) || @user == current_user) && @user != @group.user
+			@group.users.delete(@user)
+			@user.group = nil
+			@user.requests.where(group_id: @group.id).first.destroy
+			redirect_to group_path(@group.id), notice: "#{@user.name} has been removed from #{@group.name}"
+		else
+			redirect_to group_path(@group.id), alert: "You are not authorized to do this"
+		end
 	end
 
 	private

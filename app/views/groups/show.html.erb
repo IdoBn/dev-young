@@ -3,12 +3,21 @@
 
 <div class="row">
   <div class="large-6 columns">
-  	<ul>
+  	<table>
 			<% @group.users.each do |user| %>
-				<li><%= user.name %></li>
+				<tr>
+					<td><%= user.name %></td>
+					<% if current_user.owns?(@group) %>
+						<td><%= button_to('remove user', group_remove_path(id: @group.id, user_id: user.id), class: 'button tiny alert', method: :delete) unless user.owns?(@group) %></td>
+					<% end %>
+				</tr>
 			<% end %>
-			<%= render 'links' if current_user.owns?(@group) %>
-		</ul>
+		</table>
+		<% if current_user.owns?(@group) %>
+			<%= render 'links'  %>
+		<% else %>
+			<%= button_to('leave group', group_remove_path(id: @group.id, user_id: current_user.id), class: 'button tiny alert', method: :delete) %>
+		<% end %>
 	</div>
   <div class="large-6 columns">
   	<% if current_user.owns?(@group) && @group.unconfirmed_requests.any? %>

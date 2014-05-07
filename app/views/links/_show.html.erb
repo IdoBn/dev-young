@@ -1,0 +1,4 @@
+<div id='links_<%= user.id %>'>
+	<%= link_to("new link", new_link_path, id: 'new-link', class: 'button tiny', remote: true) if current_user == user %>
+  <%= render 'links/list', links: user.links %>
+</div>

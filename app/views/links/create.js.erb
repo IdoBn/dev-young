@@ -1,0 +1,14 @@
+var html = "<%= j(render(@link)) %>";
+var $elem = $(html).hide();
+
+$('#link-form').fadeOut('slow', function() {
+	$(this).replaceWith("<a href='/links/new' data-remote='true' id='new-link' class='button tiny'>new link</a>");
+	$(this).fadeIn('slow');	
+});
+
+$('#links_<%= @link.user_id %> ul').prepend($elem);
+$elem.fadeIn();
+
+$('#links-count').replaceWith("<h4 id='links-count'><%= pluralize(@links.count, 'link') if @links.count > 0 %></h4>");
+
+toastr.success("New comment added");

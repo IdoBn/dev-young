@@ -12,10 +12,17 @@
 <script type="text/javascript">
 
 	handler = Gmaps.build('Google');
-	handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-	  markers = handler.addMarkers(<%= raw @hash.to_json %>);
-	  handler.bounds.extendWith(markers);
-	  handler.fitMapToBounds();
+	handler.buildMap({ 
+			provider: {
+				disableDefaultUI: true
+			},
+			internal: {
+				id: 'map'
+			}
+		},function(){
+		  markers = handler.addMarkers(<%= raw @hash.to_json %>);
+		  handler.bounds.extendWith(markers);
+		  handler.fitMapToBounds();
 	});
-	// buildMap(<%= raw @hash.to_json %>);
+	//buildMap(<%= raw @hash.to_json %>);
 </script>

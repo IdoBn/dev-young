@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
 				@hash = Gmaps4rails.build_markers(@groups) do |group, marker|
 				  marker.lat group.latitude
 				  marker.lng group.longitude
-				  marker.infowindow  "<a href='/groups/#{group.id}'>#{group.name}</a>"
+				  marker.infowindow  "<h6><a font-size='24px' href='/groups/#{group.id}'>#{group.name}</a><h6>"
 				  # marker.picture({
 				  # 	'url' => group.user.thumbnail,
 				  # 	'width' => 36,

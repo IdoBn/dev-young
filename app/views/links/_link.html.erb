@@ -1,7 +1,7 @@
 <li class='link_<%= link.id %>'>
 	<b><a href="<%= link.url %>"><%= link.name %></a></b>
 	<small>(<%= time_ago_in_words(link.created_at) %>)</small>
-	<% if link.user = current_user %>
+	<% if link.user == current_user %>
 		<small><%= link_to "remove", link_path(link.id), method: :delete, remote: true %></small>
 	<% end %>
 </li>

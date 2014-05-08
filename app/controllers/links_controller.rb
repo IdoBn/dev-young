@@ -1,7 +1,6 @@
 class LinksController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :load_link, only: [:destroy]
-	before_filter :authorize_user!, only: [:destroy]
 
 	def create
 		@link = current_user.links.new(link_params)
@@ -17,7 +16,7 @@ class LinksController < ApplicationController
 	end
 
 	def destroy
-		if @link.destroy
+		if current_user.owns?(@link) && @link.destroy 
 			@links = current_user.links
 		else
 			render :error
@@ -31,12 +30,5 @@ class LinksController < ApplicationController
 
 		def load_link
 			@link = Link.find(params[:id])
-		end
-
-		def authorize_user!
-			unless current_user.owns?(@link)
-				redirect_to '/'
-				flash[:alert] = "You are not authorized to do this"
-			end
 		end
 end

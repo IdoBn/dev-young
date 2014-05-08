@@ -1,1 +1,5 @@
-toastr.error("<%= @link.errors.full_messages.join(', ') %>");
+<% if @link.errors.any? %>
+	toastr.error("<%= @link.errors.full_messages.join(', ') %>");
+<% else %>
+	toastr.error("You are un authorized to do this!");
+<% end %>

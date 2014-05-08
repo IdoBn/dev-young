@@ -16,7 +16,7 @@
 		<% if current_user.owns?(@group) %>
 			<%= render 'links'  %>
 		<% else %>
-			<%= button_to('leave group', group_remove_path(id: @group.id, user_id: current_user.id), class: 'button tiny alert', method: :delete) %>
+			<%= button_to('leave group', group_remove_path(id: @group.id, user_id: current_user.id), class: 'button tiny alert', method: :delete) if current_user.group == @group %>
 		<% end %>
 	</div>
   <div class="large-6 columns">

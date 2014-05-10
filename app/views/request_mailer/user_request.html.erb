@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+	<h1>Hi <%= @request.user.name %>, <%= @request.group.name %> has asked that you join them</h1>
+
+	<p>Go to your profile so you can reply to their request <%= link_to 'profile', user_url(@request.user.id) %></p>
+</body>
+</html>

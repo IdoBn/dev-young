@@ -22,6 +22,7 @@ class Request < ActiveRecord::Base
 		def check_confirm
 			if self.group_confirm && self.user_confirm
 				self.group.users << self.user
+				RequestMailer.request_confirmed(self).deliver
 			end
 		end
 end

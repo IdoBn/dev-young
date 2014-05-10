@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+	<h1>Hi <%= @request.group.user.name %>, <%= @request.user.name %> has asked to join your group!</h1>
+
+	<p>Go to your <%= link_to "group profile", group_url(@request.group.id) %> so you can reply to their request</p>
+</body>
+</html>

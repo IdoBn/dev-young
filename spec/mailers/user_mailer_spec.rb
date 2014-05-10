@@ -1,5 +1,11 @@
 require "spec_helper"
 
 describe UserMailer do
-  pending "add some examples to (or delete) #{__FILE__}"
+	context '#registration' do
+		it 'sends registration mail async' do
+	  	expect { 
+	  		UserMailer.delay.registration(user1)
+	  	}.to change(Sidekiq::Extensions::DelayedMailer.jobs, :size).by(1)
+	  end
+	end
 end

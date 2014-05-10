@@ -46,6 +46,9 @@ gem 'pg_search'
 gem "geocoder"
 gem 'gmaps4rails'
 
+# background tasks
+gem 'sidekiq'
+
 group :development, :test do
 	gem 'rspec-rails'
 	gem 'guard-rspec'

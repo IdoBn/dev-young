@@ -10,7 +10,7 @@ class RequestsController < ApplicationController
 
 		respond_to do |format|
 			if @request.save
-				RequestMailer.user_request(@request).deliver
+				RequestMailer.delay.user_request(@request)
 				format.html { redirect_to groups_path  }
 				format.js
 			else
@@ -26,7 +26,7 @@ class RequestsController < ApplicationController
 
 		respond_to do |format|
 			if @request.save
-				RequestMailer.group_request(@request).deliver
+				RequestMailer.delay.group_request(@request)
 				format.html { redirect_to groups_path, notice: "request has been sent" }
 				format.js
 			else

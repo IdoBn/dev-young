@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 	has_one :group, foreign_key: :user_id
 	has_many :requests
 
+	validates :email, :name, :thumbnail, presence: true
+
 	pg_search_scope :search, :against => :name,
 		associated_against: {group: :name},
 		:using => {

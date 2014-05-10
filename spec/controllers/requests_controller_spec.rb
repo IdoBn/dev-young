@@ -51,20 +51,22 @@ describe RequestsController do
 	  	expect(response).to redirect_to '/'
 	  end
 
-	  it 'adds user to group group confirm' do
-  		request = user2.new_request(group1)
-  		request.save
-  		expect {
-  			patch :update, request: { group_confirm: true }, user_id: user2.id, group_id: group1.id
-  		}.to_not change { group1.users.count }.by(1)
-  	end
+	  context '#update' do
+		  it 'adds user to group group confirm' do
+	  		request = user2.new_request(group1)
+	  		request.save
+	  		expect {
+	  			patch :update, request: { group_confirm: true }, user_id: user2.id, group_id: group1.id
+	  		}.to_not change { group1.users.count }.by(1)
+	  	end
 
-  	it 'adds user to group user confirm' do
-  		request = group1.new_request(user2)
-  		request.save
-  		expect {
-  			patch :update, request: { user_confirm: true }, user_id: user2.id, group_id: group1.id
-  		}.to_not change { group1.users.count }.by(1)
+	  	it 'adds user to group user confirm' do
+	  		request = group1.new_request(user2)
+	  		request.save
+	  		expect {
+	  			patch :update, request: { user_confirm: true }, user_id: user2.id, group_id: group1.id
+	  		}.to_not change { group1.users.count }.by(1)
+		  end
 	  end
 	end
 end

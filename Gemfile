@@ -51,7 +51,7 @@ group :development, :test do
 	gem 'guard-rspec'
 	gem 'factory_girl_rails', "~> 4.0"
 	gem 'database_cleaner' #for factroy girl
-	gem 'ffaker'
+	gem 'ffaker', '~> 1.23.0'
 end
 
 # Use ActiveModel has_secure_password

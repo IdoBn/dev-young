@@ -1,11 +1,12 @@
 ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.gmail.com",
+  :address              => "smtp.mandrillapp.com",
   :port                 => 587,
-  :domain               => "devyoung.com",
-  :user_name            => Rails.application.secrets.gmail_user_name,
-  :password             => Rails.application.secrets.gmial_user_password,
+  :domain               => "heroku.com",
+  :user_name            => ENV['MANDRILL_USERNAME'],
+  :password             => ENV['MANDRILL_APIKEY'],
   :authentication       => "plain",
   :enable_starttls_auto => true
 }
 
-ActionMailer::Base.default_url_options[:host] = "localhost:3000"
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.default_url_options[:host] = "localhost:3000" # this will need to change

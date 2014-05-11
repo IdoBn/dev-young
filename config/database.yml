@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: dev_young_development
   pool: 25
-  username: IdoBN
+  # username: IdoBN
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,5 +48,5 @@ test:
   encoding: unicode
   database: dev_young_test
   pool: 25
-  username: IdoBN
+  # username: IdoBN
   password:

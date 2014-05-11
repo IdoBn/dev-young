@@ -18,7 +18,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: dev_young_development
-  pool: 5
+  pool: 25
   username: IdoBN
   password:
 
@@ -47,6 +47,6 @@ test:
   adapter: postgresql
   encoding: unicode
   database: dev_young_test
-  pool: 5
+  pool: 25
   username: IdoBN
   password:

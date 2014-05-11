@@ -5,7 +5,7 @@ describe RequestMailer do
   	context "##{method}" do
   		it 'should be sent async' do
 	  		expect { 
-		  		UserMailer.delay.send(method, user1)
+		  		UserMailer.delay.send(method, user1.id)
 		  	}.to change(Sidekiq::Extensions::DelayedMailer.jobs, :size).by(1)
   		end
   	end

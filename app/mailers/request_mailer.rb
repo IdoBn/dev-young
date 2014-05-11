@@ -1,5 +1,5 @@
 class RequestMailer < ActionMailer::Base
-  default from: "notification@devyoung.com"
+  default from: "ido@devyoung.com"
 
   def group_request(request_id)
   	@request = Request.find(request_id)

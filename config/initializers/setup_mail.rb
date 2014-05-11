@@ -8,4 +8,4 @@ ActionMailer::Base.smtp_settings = {
 }
 
 ActionMailer::Base.delivery_method = :smtp
-# ActionMailer::Base.default_url_options[:host] = "localhost:3000" # this will need to change
+ActionMailer::Base.default_url_options[:host] = "http://aqueous-brook-9907.herokuapp.com/" # this will need to change
